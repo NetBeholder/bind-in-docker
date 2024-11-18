@@ -20,7 +20,6 @@ services:
       - ./zones/:/etc/bind/zones/
       - ./configuration/entrypoint.sh:/entrypoint.sh
     entrypoint: ["/usr/bin/dumb-init", "--", "/entrypoint.sh"]
-#    command: sh -c "rndc-confgen -a -A hmac-sha256 -b 256 -u bind -c /etc/bind/my-rndc.key"
     networks:
       bind-dns-network:
         ipv4_address: 172.30.0.2
@@ -36,6 +35,3 @@ networks:
       config:
         - subnet: 172.30.0.0/16
           gateway: 172.30.0.1
-    #external: true
-      # create network outside of compose
-
