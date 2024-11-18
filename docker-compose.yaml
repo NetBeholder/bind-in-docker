@@ -1,0 +1,41 @@
+#version: '3.5'
+name: bind-in-docker
+services:
+  bind-dns-server-01:
+    restart: always
+    build:
+      context: .
+      args:
+        - BIND_VERSION
+        - BIND_USER
+    environment:
+      - BIND_VERSION
+      - BIND_USER
+    volumes:
+#      - ./configuration:/configuration
+#      - ./configuration/named.conf.options:/etc/bind/named.conf.options
+#      - ./configuration/named.conf.local:/etc/bind/named.conf.local
+      - ./configuration/named.conf:/etc/bind/named.conf
+#      - ./configuration/rndc.conf:/etc/bind/rndc.conf
+      - ./zones/:/etc/bind/zones/
+      - ./configuration/entrypoint.sh:/entrypoint.sh
+    entrypoint: ["/usr/bin/dumb-init", "--", "/entrypoint.sh"]
+#    command: sh -c "rndc-confgen -a -A hmac-sha256 -b 256 -u bind -c /etc/bind/my-rndc.key"
+    networks:
+      bind-dns-network:
+        ipv4_address: 172.30.0.2
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+#      - "443:443/tcp"      
+#      - "127.0.0.1:953:953/tcp"
+networks:
+  bind-dns-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+          gateway: 172.30.0.1
+    #external: true
+      # create network outside of compose
+
