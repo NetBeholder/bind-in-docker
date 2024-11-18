@@ -18,12 +18,12 @@ arr["lol-kek.lol"]="/etc/bind/zones/db.lol-kek.lol"
 arr["dev.lol-kek.lol"]="/etc/bind/zones/db.dev.lol-kek.lol"
 ```
 
-To build the Docker image, run:
+To build a Docker image, run:
 ```bash
 docker compose build --no-cache
 ```
 
-To run the container:
+To run a container:
 ```bash
 docker compose up --build -d
 ```
@@ -33,7 +33,13 @@ To stop a container:
 docker compose down
 ```
 
-List of required packages to install in the docker image:
+To show logs:
+```bash
+watch docker compose logs
+```bash
+
+
+## List of required packages to install in the docker image:
 1. dumb-init (as pid 1);
 2. bash (for entrypoint.sh code);
 3. bind-tools (for rndc-confgen if rndc key need to change);
