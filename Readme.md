@@ -1,9 +1,9 @@
-# ISC BIND9 DNS Server in Docker with some batteries included - automatic zone reload (rndc) on any zone file changes.
+# ISC BIND9 DNS Server in Docker with some batteries included
 
 ## Features:
 1. Official Docker image from internetsystemsconsortium/bind9 as a base (alpine currently).
 2. Automatically monitors zone files for changes and reloads them in the background if they change, without restarting the server or whole container.
-3. dumb-init as pid 1 and my own implementation of entrypoint.sh. The magic of rndc is right here :)
+3. dumb-init as pid 1 and my own implementation of entrypoint.sh. The magic is right here :)
 
 ![Alt text](/misc/htop.png?raw=true "process tree in the container")
 
