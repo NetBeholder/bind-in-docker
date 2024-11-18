@@ -36,8 +36,7 @@ docker compose down
 To show logs:
 ```bash
 watch docker compose logs
-```bash
-
+```
 
 ## List of required packages to install in the docker image:
 1. dumb-init (as pid 1);
